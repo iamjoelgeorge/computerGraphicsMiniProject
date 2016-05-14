@@ -2,6 +2,63 @@
 /*A very imortant point to notice here is that whenever the camera comes very close to the object (as in this case a house), it will pass that particular wall into the insides of the house*/
 #include<stdio.h>
 #include<GL/glut.h>
+GLfloat pillar_front[][3]={
+{0.85,0.00,0.18},
+{0.85,0.00,0.14},
+{0.90,0.00,0.14},
+{0.90,0.00,0.18},
+{0.85,0.41,0.18},
+{0.85,0.41,0.14},
+{0.90,0.41,0.14},
+{0.90,0.41,0.18}};
+
+GLfloat pillar_back[][3]={
+{0.85,0.00,-0.53},
+{0.85,0.00,-0.49},
+{0.90,0.00,-0.49},
+{0.90,0.00,-0.53},
+{0.85,0.41,-0.53},
+{0.85,0.41,-0.49},
+{0.90,0.41,-0.49},
+{0.90,0.41,-0.53}};
+
+GLfloat pillar_back_left[][3]={
+{0.10,0.00,-0.53},
+{0.10,0.00,-0.49},
+{0.15,0.00,-0.49},
+{0.15,0.00,-0.53},
+{0.10,0.41,-0.53},
+{0.10,0.41,-0.49},
+{0.15,0.41,-0.49},
+{0.15,0.41,-0.53}};
+
+void pillars(int a, int b, int c, int d)
+{
+	glBegin(GL_POLYGON);
+	glColor3f(0.3,0.3,0.3);
+	glVertex3fv(pillar_front[a]);
+	glVertex3fv(pillar_front[b]);
+	glVertex3fv(pillar_front[c]);
+	glVertex3fv(pillar_front[d]);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glColor3f(0.3,0.3,0.3);
+	glVertex3fv(pillar_back[a]);
+	glVertex3fv(pillar_back[b]);
+	glVertex3fv(pillar_back[c]);
+	glVertex3fv(pillar_back[d]);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glColor3f(0.3,0.3,0.3);
+	glVertex3fv(pillar_back_left[a]);
+	glVertex3fv(pillar_back_left[b]);
+	glVertex3fv(pillar_back_left[c]);
+	glVertex3fv(pillar_back_left[d]);
+	glEnd();
+}
+
 void vertices()
 {		glBegin(GL_QUADS);//left wall
 		glColor3f(0.6,0.6,0.0);
@@ -86,7 +143,7 @@ void vertices()
 		glVertex3f(-0.2001,0.34,0.40);//front-bottom corner
 	glEnd();
 //////////////////TOP-HOUSE//////////////////////////////////
-	glBegin(GL_POLYGON);//front face of top-house
+	glBegin(GL_POLYGON);//front face of the top-house
 		glColor3f(0.5,0.3,0.5);
 		glVertex3f(0.00,0.44,0.25);
 		glVertex3f(0.00,0.80,0.25);
@@ -97,7 +154,7 @@ void vertices()
 		glVertex3f(0.30,0.51,0.25);
 	glEnd();
 
-	glBegin(GL_POLYGON);//back of top-house
+	glBegin(GL_POLYGON);//back face of the top-house
 		glColor3f(1.0,0.0,1.0);
 		glVertex3f(0.00,0.44,-0.60);
 		glVertex3f(0.00,0.80,-0.60);
@@ -127,7 +184,7 @@ void vertices()
 	glBegin(GL_QUADS);//roof-left of the top-house
 		glColor3f(1.0,0.0,0.1);
 		glVertex3f(-0.05,0.79,0.28);//roof-left_front
-		glVertex3f(0.00,0.80,-0.63);//roof-left_back
+		glVertex3f(-0.05,0.79,-0.63);//roof-left_back
 		glVertex3f(0.50,0.90,-0.63);//roof-middle_back
 		glVertex3f(0.50,0.90,0.28);//roof-middle_front
 	glEnd();
@@ -135,12 +192,12 @@ void vertices()
 	glBegin(GL_QUADS);//roof-right of the top house
 		glColor3f(1.0,0.0,0.1);
 		glVertex3f(1.05,0.79,0.28);//top-front
-		glVertex3f(1.00,0.80,-0.63);//top-back
+		glVertex3f(1.05,0.79,-0.63);//top-back
 		glVertex3f(0.50,0.90,-0.63);//middle_back
 		glVertex3f(0.50,0.90,0.28);//middle_front
 	glEnd();
 
-glBegin(GL_POLYGON);//base of the top-house
+	glBegin(GL_POLYGON);//base of the top-house
 		glColor3f(0.6,0.0,0.0);
 		glVertex3f(0.00,0.51,0.25);//front left corner (where x is in the origin)
 		glVertex3f(0.00,0.51,-0.60);//back left corner (where x is in the origin)
@@ -151,6 +208,18 @@ glBegin(GL_POLYGON);//base of the top-house
 		glVertex3f(0.21,0.41,0.25);
 	glEnd();
 
+	//front pillar
+	glBegin(GL_POLYGON);
+		glColor3f(0.3,0.3,0.3);
+		//front_pillar bottom vertices
+		pillars(0,1,2,3);//bottom
+		pillars(3,2,6,7);//right
+		pillars(1,2,6,5);//back
+		pillars(0,1,5,4);//left
+		//front pillar top vertices
+		pillars(4,5,6,7);//top
+		pillars(0,3,7,4);//front
+	glEnd();
 }
 static GLfloat theta[]={0.0,0.0,0.0};
 static GLint axis=2;
