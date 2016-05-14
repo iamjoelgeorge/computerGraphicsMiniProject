@@ -12,7 +12,7 @@ GLfloat pillar_front[][3]={
 {0.90,0.41,0.14},
 {0.90,0.41,0.18}};
 
-GLfloat pillar_back[][3]={
+GLfloat pillar_back_right[][3]={
 {0.85,0.00,-0.53},
 {0.85,0.00,-0.49},
 {0.90,0.00,-0.49},
@@ -27,10 +27,10 @@ GLfloat pillar_back_left[][3]={
 {0.10,0.00,-0.49},
 {0.15,0.00,-0.49},
 {0.15,0.00,-0.53},
-{0.10,0.45,-0.53},
-{0.10,0.45,-0.49},
-{0.15,0.45,-0.49},
-{0.15,0.45,-0.53}};
+{0.10,0.50,-0.53},
+{0.10,0.50,-0.49},
+{0.15,0.50,-0.49},
+{0.15,0.50,-0.53}};
 
 void pillars(int a, int b, int c, int d)
 {
@@ -44,10 +44,10 @@ void pillars(int a, int b, int c, int d)
 
 	glBegin(GL_POLYGON);
 	glColor3f(0.3,0.3,0.3);
-	glVertex3fv(pillar_back[a]);
-	glVertex3fv(pillar_back[b]);
-	glVertex3fv(pillar_back[c]);
-	glVertex3fv(pillar_back[d]);
+	glVertex3fv(pillar_back_right[a]);
+	glVertex3fv(pillar_back_right[b]);
+	glVertex3fv(pillar_back_right[c]);
+	glVertex3fv(pillar_back_right[d]);
 	glEnd();
 
 	glBegin(GL_POLYGON);
@@ -60,22 +60,38 @@ void pillars(int a, int b, int c, int d)
 }
 
 void vertices()
-{		glBegin(GL_QUADS);//left wall
+{		
+	glBegin(GL_QUADS);//left wall
 		glColor3f(0.6,0.6,0.0);
 		glVertex3f(-0.20,0.00,0.50);
 		glVertex3f(-0.20,0.40,0.50);
-		glVertex3f(-0.20,0.40,0.00);
+		glVertex3f(-0.20,0.40,0.0);
+		glVertex3f(-0.20,0.00,0.0);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);//left wall
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(-0.20,0.00,0.50);
+		glVertex3f(-0.20,0.395,0.50);
+		glVertex3f(-0.20,0.395,0.00);
 		glVertex3f(-0.20,0.00,0.00);
 	glEnd();
 
 	glBegin(GL_QUADS);//right wall
-		glColor3f(0.6,0.6,0.0);
+		glColor3f(0.2,0.3,0.4);
 		glVertex3f(0.50,0.00,0.50);
 		glVertex3f(0.50,0.40,0.50);
 		glVertex3f(0.50,0.40,0.00);
 		glVertex3f(0.50,0.00,0.00);
 	glEnd();
 
+	glBegin(GL_LINE_LOOP);//right wall
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(0.50,0.00,0.50);
+		glVertex3f(0.50,0.395,0.50);
+		glVertex3f(0.50,0.395,0.00);
+		glVertex3f(0.50,0.00,0.00);
+	glEnd();
 
 	glBegin(GL_POLYGON);//front of the house
 		glColor3f(0.6,0.6,0.0);
@@ -98,21 +114,46 @@ void vertices()
 	glBegin(GL_QUADS);//roof-left
 		glColor3f(1.0,0.0,0.1);
 		glVertex3f(-0.25,0.39,0.53);//roof-left_front
-		glVertex3f(-0.25,0.39,0.03);//roof-left_back
-		glVertex3f(0.30,0.50,0.03);//roof-middle_back
+		glVertex3f(-0.25,0.39,-0.05);//roof-left_back
+		glVertex3f(0.30,0.50,-0.05);//roof-middle_back
+		glVertex3f(0.30,0.50,0.53);//roof-middle_front
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);//roof-left
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(-0.25,0.39,0.53);//roof-left_front
+		glVertex3f(-0.25,0.39,-0.05);//roof-left_back
+		glVertex3f(0.30,0.50,-0.05);//roof-middle_back
 		glVertex3f(0.30,0.50,0.53);//roof-middle_front
 	glEnd();
 
 	glBegin(GL_QUADS);//roof-right
-		glColor3f(1.0,0.0,0.1);
+		glColor3f(0.81176,0.3254,0.0);
 		glVertex3f(0.55,0.3755,0.53);//right_front
-		glVertex3f(0.55,0.3755,0.03);//right_back
-		glVertex3f(0.30,0.50,0.03);//middle_back
+		glVertex3f(0.55,0.3755,-0.05);//right_back
+		glVertex3f(0.30,0.50,-0.05);//middle_back
+		glVertex3f(0.30,0.50,0.53);//middle_front
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);//roof-right
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(0.55,0.3755,0.53);//right_front
+		glVertex3f(0.55,0.3755,-0.05);//right_back
+		glVertex3f(0.30,0.50,-0.05);//middle_back
 		glVertex3f(0.30,0.50,0.53);//middle_front
 	glEnd();
 
 	glBegin(GL_QUADS);//base
 		glColor3f(0.2,0.3,0.4);
+		glVertex3f(-0.20,0.00,0.50);//left-front corner
+		glVertex3f(-0.20,0.00,0.00);//left-back corner
+		glVertex3f(0.50,0.00,0.00);//right-back corner
+		glVertex3f(0.50,0.00,0.50);//right-front corner
+	glEnd();
+
+
+	glBegin(GL_LINE_LOOP);//base
+		glColor3f(0.0,0.0,0.0);
 		glVertex3f(-0.20,0.00,0.50);//left-front corner
 		glVertex3f(-0.20,0.00,0.00);//left-back corner
 		glVertex3f(0.50,0.00,0.00);//right-back corner
@@ -135,8 +176,24 @@ void vertices()
 		glVertex3f(0.5001,0.25-0.010,0.20);//front-bottom
 	glEnd();
 
+	glBegin(GL_LINE_LOOP);//right window
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(0.5001,0.25-0.010,0.102);//back-bottom
+		glVertex3f(0.5001,0.35-0.010,0.102);//back-top
+		glVertex3f(0.5001,0.35-0.010,0.20);//fronttop
+		glVertex3f(0.5001,0.25-0.010,0.20);//front-bottom
+	glEnd();
+
 	glBegin(GL_QUADS);//left window
 		glColor3f(0.5,0.1,0.3);
+		glVertex3f(-0.2001,0.34,0.102);//back-bottom
+		glVertex3f(-0.2001,0.15,0.102);//back-top
+		glVertex3f(-0.2001,0.15,0.40);//front-top
+		glVertex3f(-0.2001,0.34,0.40);//front-bottom
+	glEnd();
+
+		glBegin(GL_LINE_LOOP);//left window
+		glColor3f(0.0,0.0,0.0);
 		glVertex3f(-0.2001,0.34,0.102);//back-bottom
 		glVertex3f(-0.2001,0.15,0.102);//back-top
 		glVertex3f(-0.2001,0.15,0.40);//front-top
@@ -145,18 +202,18 @@ void vertices()
 //////////////////TOP-HOUSE//////////////////////////////////
 	glBegin(GL_POLYGON);//front face of the top-house
 		glColor3f(0.5,0.3,0.5);
-		glVertex3f(0.00,0.44,0.25);
+		glVertex3f(0.00,0.50,0.25);
 		glVertex3f(0.00,0.80,0.25);
 		glVertex3f(0.50,0.90,0.25);
 		glVertex3f(1.00,0.80,0.25);
-		glVertex3f(1.00,0.41,0.25);
-		glVertex3f(0.50,0.41,0.25);
-		glVertex3f(0.30,0.51,0.25);
+		glVertex3f(1.00,0.40,0.25);
+		glVertex3f(0.50,0.40,0.25);
+		glVertex3f(0.30,0.50,0.25);
 	glEnd();
 
 	glBegin(GL_POLYGON);//back face of the top-house
 		glColor3f(0.5,0.3,0.5);
-		glVertex3f(0.00,0.44,-0.60);
+		glVertex3f(0.00,0.50,-0.60);
 		glVertex3f(0.00,0.80,-0.60);
 		glVertex3f(0.50,0.90,-0.60);
 		glVertex3f(1.00,0.80,-0.60);
@@ -167,10 +224,18 @@ void vertices()
 
 	glBegin(GL_QUADS);//left wall of the top_house
 		glColor3f(0.5,0.3,0.5);
-		glVertex3f(0.00,0.44,0.25);//bottom front
+		glVertex3f(0.00,0.50,0.25);//bottom front
 		glVertex3f(0.00,0.80,0.25);//top front
 		glVertex3f(0.00,0.80,-0.60);//top back
-		glVertex3f(0.00,0.44,-0.60);//bottom back
+		glVertex3f(0.00,0.50,-0.60);//bottom back
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);//left wall of the top_house
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(0.00,0.50,0.25);//bottom front
+		glVertex3f(0.00,0.785,0.25);//top front
+		glVertex3f(0.00,0.785,-0.60);//top back
+		glVertex3f(0.00,0.50,-0.60);//bottom back
 	glEnd();
 
 	glBegin(GL_QUADS);//right wall of the top_house
@@ -181,7 +246,15 @@ void vertices()
 		glVertex3f(1.0,0.40,-0.60);//bottom back
 	glEnd();
 
-	glBegin(GL_QUADS);//roof-left of the top-house
+	glBegin(GL_LINE_LOOP);//right wall of the top_house
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(1.0,0.40,0.25);//bottom front
+		glVertex3f(1.0,0.785,0.25);//top front
+		glVertex3f(1.0,0.785,-0.60);//top back
+		glVertex3f(1.0,0.40,-0.60);//bottom back
+	glEnd();
+
+	glBegin(GL_QUADS);//left roof of the top-house
 		glColor3f(1.0,0.0,0.1);
 		glVertex3f(-0.05,0.79,0.28);//roof-left_front
 		glVertex3f(-0.05,0.79,-0.63);//roof-left_back
@@ -189,8 +262,24 @@ void vertices()
 		glVertex3f(0.50,0.90,0.28);//roof-middle_front
 	glEnd();
 
-	glBegin(GL_QUADS);//roof-right of the top house
-		glColor3f(1.0,0.0,0.1);
+	glBegin(GL_LINE_LOOP);//left roof of the top-house
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(-0.05,0.79,0.28);//roof-left_front
+		glVertex3f(-0.05,0.79,-0.63);//roof-left_back
+		glVertex3f(0.50,0.90,-0.63);//roof-middle_back
+		glVertex3f(0.50,0.90,0.28);//roof-middle_front
+	glEnd();
+
+	glBegin(GL_QUADS);//right roof of the top house
+		glColor3f(0.81176,0.3254,0.0);
+		glVertex3f(1.05,0.79,0.28);//top-front
+		glVertex3f(1.05,0.79,-0.63);//top-back
+		glVertex3f(0.50,0.90,-0.63);//middle_back
+		glVertex3f(0.50,0.90,0.28);//middle_front
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);//right roof of the top house
+		glColor3f(0.0,0.0,0.0);
 		glVertex3f(1.05,0.79,0.28);//top-front
 		glVertex3f(1.05,0.79,-0.63);//top-back
 		glVertex3f(0.50,0.90,-0.63);//middle_back
@@ -198,14 +287,15 @@ void vertices()
 	glEnd();
 
 	glBegin(GL_POLYGON);//base of the top-house
-		glColor3f(0.5,0.3,0.5);
-		glVertex3f(0.00,0.51,0.25);//front left corner (where x is in the origin)
-		glVertex3f(0.00,0.51,-0.60);//back left corner (where x is in the origin)
-		glVertex3f(0.10,0.50,-0.60);//middle top;
-		glVertex3f(0.21,0.41,-0.60);//back somewhat-middle
-		glVertex3f(1.0,0.41,-0.60);
-		glVertex3f(1.0,0.41,0.25);
-		glVertex3f(0.21,0.41,0.25);
+		glColor3f(0.5,0.1,0.0);
+		glVertex3f(0.50,0.41,0.25);
+		glVertex3f(0.30,0.51,0.25);
+		glVertex3f(0.00,0.50,0.25);
+		glVertex3f(0.00,0.50,-0.60);
+		glVertex3f(0.30,0.51,-0.60);
+		glVertex3f(0.50,0.41,-0.60);
+		glVertex3f(1.00,0.41,-0.60);
+		glVertex3f(1.00,0.41,0.25);
 	glEnd();
 
 	//Pillar
@@ -229,8 +319,24 @@ void vertices()
 		glVertex3f(0.92,0.60,0.2501);//bottom-right corner
 	glEnd();
 
+	glBegin(GL_LINE_LOOP);//Top house window (front)
+		glColor3f(0.0,0.0,0.0);
+		glVertex3f(0.65,0.60,0.2501);//bottom-left corner (Keeping the z-axis 0.0001 forward from the front-face)
+		glVertex3f(0.65,0.75,0.2501);//top-left corner
+		glVertex3f(0.92,0.75,0.2501);//top-right corner
+		glVertex3f(0.92,0.60,0.2501);//bottom-right corner
+	glEnd();
+
 	glBegin(GL_QUADS);//Top house window (left)
 		glColor3f(1.0,0.0,0.1);
+		glVertex3f(-0.001,0.60,-0.50);//front-down
+		glVertex3f(-0.001,0.60,-0.33);//back-down
+		glVertex3f(-0.001,0.75,-0.33);//back-top
+		glVertex3f(-0.001,0.75,-0.50);//front-top
+	glEnd();
+	
+	glBegin(GL_LINE_LOOP);//Top house window (left)
+		glColor3f(0.0,0.0,0.0);
 		glVertex3f(-0.001,0.60,-0.50);//front-down
 		glVertex3f(-0.001,0.60,-0.33);//back-down
 		glVertex3f(-0.001,0.75,-0.33);//back-top
@@ -311,7 +417,7 @@ void main(int argc, char** argv)
 	glutInitWindowSize(500,500);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("My house");
-	glClearColor(0.7,0.7,0.7,0.0);
+	glClearColor(0.0,0.0,0.0,0.0);
 	//init();
 	glutDisplayFunc(display);
 	glEnable(GL_DEPTH_TEST);
