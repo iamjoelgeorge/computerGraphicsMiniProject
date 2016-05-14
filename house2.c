@@ -1,4 +1,3 @@
-
 /*A very imortant point to notice here is that whenever the camera comes very close to the object (as in this case a house), it will pass that particular wall into the insides of the house*/
 #include<stdio.h>
 #include<GL/glut.h>
@@ -202,6 +201,17 @@ void vertices()
 //////////////////TOP-HOUSE//////////////////////////////////
 	glBegin(GL_POLYGON);//front face of the top-house
 		glColor3f(0.5,0.3,0.5);
+		glVertex3f(0.00,0.50,0.25);
+		glVertex3f(0.00,0.80,0.25);
+		glVertex3f(0.50,0.90,0.25);
+		glVertex3f(1.00,0.80,0.25);
+		glVertex3f(1.00,0.40,0.25);
+		glVertex3f(0.50,0.40,0.25);
+		glVertex3f(0.30,0.50,0.25);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);//front face of the top-house
+		glColor3f(0.0,0.0,0.0);
 		glVertex3f(0.00,0.50,0.25);
 		glVertex3f(0.00,0.80,0.25);
 		glVertex3f(0.50,0.90,0.25);
