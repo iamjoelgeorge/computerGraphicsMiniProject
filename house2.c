@@ -27,10 +27,10 @@ GLfloat pillar_back_left[][3]={
 {0.10,0.00,-0.49},
 {0.15,0.00,-0.49},
 {0.15,0.00,-0.53},
-{0.10,0.41,-0.53},
-{0.10,0.41,-0.49},
-{0.15,0.41,-0.49},
-{0.15,0.41,-0.53}};
+{0.10,0.45,-0.53},
+{0.10,0.45,-0.49},
+{0.15,0.45,-0.49},
+{0.15,0.45,-0.53}};
 
 void pillars(int a, int b, int c, int d)
 {
@@ -78,7 +78,7 @@ void vertices()
 
 
 	glBegin(GL_POLYGON);//front of the house
-		glColor3f(0.2,0.3,0.4);
+		glColor3f(0.6,0.6,0.0);
 		glVertex3f(-0.20,0.00,0.50);//left-bottom corner
 		glVertex3f(-0.20,0.40,0.50);//left-top corner
 		glVertex3f(0.30,0.50,0.50);//middle-top
@@ -112,7 +112,7 @@ void vertices()
 	glEnd();
 
 	glBegin(GL_QUADS);//base
-		glColor3f(1.0,1.0,1.0);
+		glColor3f(0.2,0.3,0.4);
 		glVertex3f(-0.20,0.00,0.50);//left-front corner
 		glVertex3f(-0.20,0.00,0.00);//left-back corner
 		glVertex3f(0.50,0.00,0.00);//right-back corner
@@ -121,26 +121,26 @@ void vertices()
 
 	glBegin(GL_QUADS);//door
 		glColor3f(0.5,0.1,0.3);
-		glVertex3f(-0.10,0.00,0.50001);//bottom-left corner
-		glVertex3f(-0.10,0.20,0.50001);//top-left corner
-		glVertex3f(0.10,0.20,0.50001);//top-right corner
-		glVertex3f(0.10,0.00,0.50001);//bottom-right corner
+		glVertex3f(-0.10,0.00,0.501);//bottom-left corner
+		glVertex3f(-0.10,0.20,0.501);//top-left corner
+		glVertex3f(0.10,0.20,0.501);//top-right corner
+		glVertex3f(0.10,0.00,0.501);//bottom-right corner
 	glEnd();	
 
 	glBegin(GL_QUADS);//right window
-		glColor3f(1.0,1.0,1.0);
-		glVertex3f(0.2001+0.30,0.25-0.010,0.102);//back-bottom corner
-		glVertex3f(0.2001+0.30,0.35-0.010,0.102);//back-top corner
-		glVertex3f(0.2001+0.30,0.35-0.010,0.20);//fronttop corner
-		glVertex3f(0.2001+0.30,0.25-0.010,0.20);//front-bottom corner
+		glColor3f(0.5,0.1,0.3);
+		glVertex3f(0.5001,0.25-0.010,0.102);//back-bottom
+		glVertex3f(0.5001,0.35-0.010,0.102);//back-top
+		glVertex3f(0.5001,0.35-0.010,0.20);//fronttop
+		glVertex3f(0.5001,0.25-0.010,0.20);//front-bottom
 	glEnd();
 
 	glBegin(GL_QUADS);//left window
-		glColor3f(1.0,1.0,1.0);
-		glVertex3f(-0.2001,0.34,0.102);//back-bottom corner
-		glVertex3f(-0.2001,0.15,0.102);//back-top corner
-		glVertex3f(-0.2001,0.15,0.40);//front-top corner
-		glVertex3f(-0.2001,0.34,0.40);//front-bottom corner
+		glColor3f(0.5,0.1,0.3);
+		glVertex3f(-0.2001,0.34,0.102);//back-bottom
+		glVertex3f(-0.2001,0.15,0.102);//back-top
+		glVertex3f(-0.2001,0.15,0.40);//front-top
+		glVertex3f(-0.2001,0.34,0.40);//front-bottom
 	glEnd();
 //////////////////TOP-HOUSE//////////////////////////////////
 	glBegin(GL_POLYGON);//front face of the top-house
@@ -155,7 +155,7 @@ void vertices()
 	glEnd();
 
 	glBegin(GL_POLYGON);//back face of the top-house
-		glColor3f(1.0,0.0,1.0);
+		glColor3f(0.5,0.3,0.5);
 		glVertex3f(0.00,0.44,-0.60);
 		glVertex3f(0.00,0.80,-0.60);
 		glVertex3f(0.50,0.90,-0.60);
@@ -166,7 +166,7 @@ void vertices()
 	glEnd();
 
 	glBegin(GL_QUADS);//left wall of the top_house
-		glColor3f(0.1,0.1,0.0);
+		glColor3f(0.5,0.3,0.5);
 		glVertex3f(0.00,0.44,0.25);//bottom front
 		glVertex3f(0.00,0.80,0.25);//top front
 		glVertex3f(0.00,0.80,-0.60);//top back
@@ -174,7 +174,7 @@ void vertices()
 	glEnd();
 
 	glBegin(GL_QUADS);//right wall of the top_house
-		glColor3f(0.1,0.1,0.0);
+		glColor3f(0.5,0.3,0.5);
 		glVertex3f(1.0,0.40,0.25);//bottom front
 		glVertex3f(1.0,0.80,0.25);//top front
 		glVertex3f(1.0,0.80,-0.60);//top back
@@ -198,7 +198,7 @@ void vertices()
 	glEnd();
 
 	glBegin(GL_POLYGON);//base of the top-house
-		glColor3f(0.6,0.0,0.0);
+		glColor3f(0.5,0.3,0.5);
 		glVertex3f(0.00,0.51,0.25);//front left corner (where x is in the origin)
 		glVertex3f(0.00,0.51,-0.60);//back left corner (where x is in the origin)
 		glVertex3f(0.10,0.50,-0.60);//middle top;
@@ -208,7 +208,7 @@ void vertices()
 		glVertex3f(0.21,0.41,0.25);
 	glEnd();
 
-	//front pillar
+	//Pillar
 	glBegin(GL_POLYGON);
 		glColor3f(0.3,0.3,0.3);
 		//front_pillar bottom vertices
@@ -219,6 +219,22 @@ void vertices()
 		//front pillar top vertices
 		pillars(4,5,6,7);//top
 		pillars(0,3,7,4);//front
+	glEnd();
+
+	glBegin(GL_QUADS);//Top house window (front)
+		glColor3f(0.6,0.6,0.0);
+		glVertex3f(0.65,0.60,0.2501);//bottom-left corner (Keeping the z-axis 0.0001 forward from the front-face)
+		glVertex3f(0.65,0.75,0.2501);//top-left corner
+		glVertex3f(0.92,0.75,0.2501);//top-right corner
+		glVertex3f(0.92,0.60,0.2501);//bottom-right corner
+	glEnd();
+
+	glBegin(GL_QUADS);//Top house window (left)
+		glColor3f(1.0,0.0,0.1);
+		glVertex3f(-0.001,0.60,-0.50);//front-down
+		glVertex3f(-0.001,0.60,-0.33);//back-down
+		glVertex3f(-0.001,0.75,-0.33);//back-top
+		glVertex3f(-0.001,0.75,-0.50);//front-top
 	glEnd();
 }
 static GLfloat theta[]={0.0,0.0,0.0};
@@ -295,7 +311,7 @@ void main(int argc, char** argv)
 	glutInitWindowSize(500,500);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("My house");
-	glClearColor(0.0,0.0,0.0,0.0);
+	glClearColor(0.7,0.7,0.7,0.0);
 	//init();
 	glutDisplayFunc(display);
 	glEnable(GL_DEPTH_TEST);
