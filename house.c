@@ -475,7 +475,6 @@ void main(int argc, char** argv)
 	glutDisplayFunc(display);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_NORMALIZE);
 	glShadeModel(GL_SMOOTH);
