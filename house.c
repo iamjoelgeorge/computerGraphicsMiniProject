@@ -1,35 +1,33 @@
-/*A very imortant point to notice here is that whenever the camera comes very close to the object (as in this case a house), it will pass that particular wall into the insides of the house*/
-#include<stdio.h>
+//A very imortant point to notice here is that whenever the camera comes very close to the object (as in this case a house), it will pass that particular wall into the insides of the house*/
+
+
+
+/*
+Things yet to be updated:
+1-The camera seems to be the light source. Make the sun the light source.
+2-Alignment of the sun.
+3-Make the sun go from east to west and move the light along with it.
+*/
+
+
 #include<GL/glut.h>
 GLfloat pillar_front[][3]={
-{0.85,0.00,0.18},
-{0.85,0.00,0.14},
-{0.90,0.00,0.14},
-{0.90,0.00,0.18},
-{0.85,0.40,0.18},
-{0.85,0.40,0.14},
-{0.90,0.40,0.14},
-{0.90,0.40,0.18}};
+{0.85,0.00,0.18},{0.85,0.00,0.14},
+{0.90,0.00,0.14},{0.90,0.00,0.18},
+{0.85,0.40,0.18},{0.85,0.40,0.14},
+{0.90,0.40,0.14},{0.90,0.40,0.18}};
 
 GLfloat pillar_back_right[][3]={
-{0.85,0.00,-0.53},
-{0.85,0.00,-0.49},
-{0.90,0.00,-0.49},
-{0.90,0.00,-0.53},
-{0.85,0.40,-0.53},
-{0.85,0.40,-0.49},
-{0.90,0.40,-0.49},
-{0.90,0.40,-0.53}};
+{0.85,0.00,-0.53},{0.85,0.00,-0.49},
+{0.90,0.00,-0.49},{0.90,0.00,-0.53},
+{0.85,0.40,-0.53},{0.85,0.40,-0.49},
+{0.90,0.40,-0.49},{0.90,0.40,-0.53}};
 
 GLfloat pillar_back_left[][3]={
-{0.10,0.00,-0.53},
-{0.10,0.00,-0.49},
-{0.15,0.00,-0.49},
-{0.15,0.00,-0.53},
-{0.10,0.45,-0.53},
-{0.10,0.45,-0.49},
-{0.15,0.45,-0.49},
-{0.15,0.45,-0.53}};
+{0.10,0.00,-0.53},{0.10,0.00,-0.49},
+{0.15,0.00,-0.49},{0.15,0.00,-0.53},
+{0.10,0.45,-0.53},{0.10,0.45,-0.49},
+{0.15,0.45,-0.49},{0.15,0.45,-0.53}};
 
 void pillars(int a, int b, int c, int d)
 {
@@ -116,7 +114,6 @@ void vertices()
 
 	glBegin(GL_QUADS);//roof-left
 		glColor3f(1.0,0.0,0.1);
-
 		glVertex3f(-0.25,0.39,0.53);//roof-left_front
 		glVertex3f(-0.25,0.39,-0.05);//roof-left_back
 		glVertex3f(0.30,0.50,-0.05);//roof-middle_back
@@ -173,6 +170,14 @@ void vertices()
 		glVertex3f(0.10,0.00,0.501);//bottom-right corner
 	glEnd();	
 
+	glBegin(GL_LINE_LOOP);//door
+		glColor3f(0.5,0.1,0.3);
+		glVertex3f(-0.10,0.00,0.501);//bottom-left corner
+		glVertex3f(-0.10,0.20,0.501);//top-left corner
+		glVertex3f(0.10,0.20,0.501);//top-right corner
+		glVertex3f(0.10,0.00,0.501);//bottom-right corner
+	glEnd();
+
 	glBegin(GL_QUADS);//right window
 		glColor3f(0.5,0.1,0.3);
 		glVertex3f(0.5001,0.25-0.010,0.102);//back-bottom
@@ -206,9 +211,7 @@ void vertices()
 	glEnd();
 
 
-
-	//////////////////TOP-HOUSE/////////////////////////
-
+/////////////////////TOP-HOUSE///////////////////////////////////
 
 
 	glBegin(GL_POLYGON);//front face (top house)
@@ -339,7 +342,7 @@ void vertices()
 		glVertex3f(0.50,0.90,0.28);//middle_front
 	glEnd();
 
-	//Pillar
+ //////////////Drawing the pillars///////////////////
 	glBegin(GL_POLYGON);
 		glColor3f(0.3,0.3,0.3);
 		//front_pillar bottom vertices
@@ -351,6 +354,7 @@ void vertices()
 		pillars(4,5,6,7);//top
 		pillars(0,3,7,4);//front
 	glEnd();
+ /////////////////////////////////////////////////////
 
 	glBegin(GL_QUADS);//Top house window (front)
 		glColor3f(0.6,0.6,0.0);
@@ -388,46 +392,35 @@ static GLfloat theta[]={0.0,0.0,0.0};
 static GLint axis=2;
 static GLdouble viewer[]={0.0,3.0,8.0};
 
+void init()
+{
+	float light_diffuse[] = {2.0, 2.0, 0.0, 0.0};
+	float light_ambient[] = {0.8, 0.8, 1.0, 0.0};
+	float light_position[] = {10.0, 5.0, 5.0, 0.0};
+	//The next two line enable some of the the characteristics needed for lighing
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+}
 void display()
 {
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
-
-	GLfloat lightposition0[]={5.0f,2.0f,2.0f,1.0f};
-	GLfloat lightposition1[]={-5.0f,5.0f,-3.0f,1.0f};
-
-	GLfloat lightdiffuse[]={1.0f,1.0f,1.0f,1.0f};
-	GLfloat lightambient[]={0.50f,0.50f,0.50f,0.50f};
-	GLfloat lightcolor[]={1.0,1.0,1.0,0.5};//light yellow
-
-	//glLightfv(GL_LIGHT1,GL_AMBIENT,lightambient);
-	//glLightfv(GL_LIGHT1,GL_POSITION,lightposition0);
-	//glLightfv(GL_LIGHT1,GL_POSITION,lightposition1);
-	//glLightfv(GL_LIGHT1,GL_DIFFUSE,lightdiffuse);
-	//LIGHT1 will take a fully intense white color
-
-	//glLightfv(GL_LIGHT0,GL_POSITION,lightposition0);
-	//glLightfv(GL_LIGHT0,GL_POSITION,lightposition1);
-	//glLightfv(GL_LIGHT0,GL_DIFFUSE,lightdiffuse);
-	//glLightfv(GL_LIGHT0,GL_DIFFUSE, lightcolor);
-	
+	glLoadIdentity();	
 	gluLookAt(viewer[0],viewer[1],viewer[2],0,0,0,0,1,0);
 	glRotatef(theta[0],1.0,0.0,0.0);
 	glRotatef(theta[1],0.0,1.0,0.0);
 	glRotatef(theta[2],0.0,0.0,1.0);
-	//glPushMatrix();	
-	glScalef(5.0,5.0,5.0);
-	vertices();
-	//glPopMatrix();
+
+ //////////////////////SUN///////////////////////////////
+			glColor3f(1.0,0.6,0.0);
+    		glutSolidSphere(1.0,20,20);
+ ////////////////////////////////////////////////////////
+
+	glScalef(5.0,5.0,5.0);//
+	vertices();//calling the vertices function mentioned above
 	glFlush();
 	glutSwapBuffers();
 }
-
-/*void init()
-{
-	glClearColor(1.0,1.0,1.0,1.0);
-	gluOrtho2D(0,900,0,900);
-}*/
 
 void mouse(int bt, int st, int x, int y)
 {
@@ -478,14 +471,15 @@ void main(int argc, char** argv)
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("My house");
 	glClearColor(0.0,0.0,0.0,0.0);
-	//init();
+	init();
 	glutDisplayFunc(display);
 	glEnable(GL_DEPTH_TEST);
-//	glEnable(GL_LIGHT0);
-//	glEnable(GL_LIGHT1);
-//	glEnable(GL_LIGHTING);
-//	glEnable(GL_NORMALIZE);
-//	glShadeModel(GL_SMOOTH);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_NORMALIZE);
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_COLOR_MATERIAL);//To retain the original color of the objects
 	glutReshapeFunc(myreshape);
 	glutMouseFunc(mouse);
 	glutKeyboardFunc(keys);
