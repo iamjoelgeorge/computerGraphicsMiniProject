@@ -62,6 +62,7 @@ void vertices()
 {		
 	glBegin(GL_QUADS);//left wall
 		glColor3f(0.6,0.6,0.0);
+		glNormal3f(-1.0,0.0,0.0);
 		glVertex3f(-0.20,0.00,0.50);
 		glVertex3f(-0.20,0.40,0.50);
 		glVertex3f(-0.20,0.40,0.0);
@@ -78,6 +79,7 @@ void vertices()
 
 	glBegin(GL_QUADS);//right wall
 		glColor3f(0.2,0.3,0.4);
+		glNormal3f(1.0,0.0,0.0);
 		glVertex3f(0.50,0.00,0.50);
 		glVertex3f(0.50,0.40,0.50);
 		glVertex3f(0.50,0.40,0.00);
@@ -94,6 +96,7 @@ void vertices()
 
 	glBegin(GL_POLYGON);//front of the house
 		glColor3f(0.6,0.6,0.0);
+		glNormal3f(0.0,0.0,1.0);
 		glVertex3f(-0.20,0.00,0.50);//left-bottom corner
 		glVertex3f(-0.20,0.40,0.50);//left-top corner
 		glVertex3f(0.30,0.50,0.50);//middle-top
@@ -103,6 +106,7 @@ void vertices()
 
 	glBegin(GL_POLYGON);//back of the house
 		glColor3f(0.2,0.3,0.4);
+		glNormal3f(0.0,0.0,-1.0);
 		glVertex3f(-0.20,0.00,0.00);//left-bottom corner
 		glVertex3f(-0.20,0.40,0.00);//left-top corner
 		glVertex3f(0.30,0.50,0.00);//middle-top
@@ -112,6 +116,7 @@ void vertices()
 
 	glBegin(GL_QUADS);//roof-left
 		glColor3f(1.0,0.0,0.1);
+
 		glVertex3f(-0.25,0.39,0.53);//roof-left_front
 		glVertex3f(-0.25,0.39,-0.05);//roof-left_back
 		glVertex3f(0.30,0.50,-0.05);//roof-middle_back
@@ -144,6 +149,7 @@ void vertices()
 
 	glBegin(GL_QUADS);//base
 		glColor3f(0.2,0.3,0.4);
+		glNormal3f(0.0,-1.0,0.0);
 		glVertex3f(-0.20,0.00,0.50);//left-front corner
 		glVertex3f(-0.20,0.00,0.00);//left-back corner
 		glVertex3f(0.50,0.00,0.00);//right-back corner
@@ -207,6 +213,7 @@ void vertices()
 
 	glBegin(GL_POLYGON);//front face (top house)
 		glColor3f(0.5,0.3,0.5);
+		glNormal3f(0.0,0.0,1.0);
 		glVertex3f(0.50,0.40,0.25);
 		glVertex3f(0.30,0.50,0.25);
 		glVertex3f(0.00,0.44,0.25);
@@ -218,6 +225,7 @@ void vertices()
 
 	glBegin(GL_POLYGON);//back face (top house)
 		glColor3f(0.5,0.3,0.5);
+		glNormal3f(0.0,0.0,-1.0);
 		glVertex3f(0.50,0.40,-0.60);
 		glVertex3f(0.30,0.50,-0.60);
 		glVertex3f(0.00,0.44,-0.60);
@@ -229,6 +237,7 @@ void vertices()
 
 	glBegin(GL_POLYGON);//base of the top-house (right)
 		glColor3f(0.5,0.1,0.0);
+		glNormal3f(0.0,-1.0,0.0);
 		glVertex3f(1.0,0.40,0.249);
 		glVertex3f(0.5,0.40,0.249);
 		glVertex3f(0.3,0.5001,0.249);
@@ -249,6 +258,7 @@ void vertices()
 
 	glBegin(GL_POLYGON);//base of the top-house (left)
 		glColor3f(0.5,0.1,0.0);
+		glNormal3f(0.0,-1.0,0.0);
 		glVertex3f(0.0,0.44,0.25);
 		glVertex3f(0.0,0.44,-0.60);
 		glVertex3f(0.3,0.5001,-0.60);
@@ -265,6 +275,7 @@ void vertices()
 
 	glBegin(GL_QUADS);//left wall of the top_house
 		glColor3f(0.5,0.3,0.5);
+		glNormal3f(-1.0,0.0,0.0);
 		glVertex3f(0.00,0.44,0.25);//bottom front
 		glVertex3f(0.00,0.80,0.25);//top front
 		glVertex3f(0.00,0.80,-0.60);//top back
@@ -281,6 +292,7 @@ void vertices()
 
 	glBegin(GL_QUADS);//right wall of the top_house
 		glColor3f(0.5,0.3,0.5);
+		glNormal3f(1.0,0.0,0.0);
 		glVertex3f(1.0,0.40,0.25);//bottom front
 		glVertex3f(1.0,0.80,0.25);//top front
 		glVertex3f(1.0,0.80,-0.60);//top back
