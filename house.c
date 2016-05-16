@@ -1,8 +1,15 @@
-/*A very imortant point to notice here is that whenever the camera comes
-  very close to the object (as in this case a house), it will pass that 
-  particular wall into the insides of the house
-*/
+/*
+Copyright (c) 2016[Joel George]
 
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this code to deal in the code without restriction, including 
+without limitation the rights to use, copy, modify, merge, publish, 
+distribute, and sublicense this code, and to permit persons to whomever 
+this code is furnished to, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included 
+in all copies of of the code.
+*/
 
 /*
 Things yet to be updated:
@@ -11,6 +18,7 @@ Things yet to be updated:
 3-Make the sun go from east to west and move the light along with it
   (possibly also showing the different colors of the day).
 */
+
 
 #include<GL/glut.h>
 GLfloat pillar_front[][3]={
