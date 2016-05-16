@@ -355,7 +355,7 @@ void vertices()
  //////////////Drawing the pillars///////////////////
 	glBegin(GL_POLYGON);
 		glColor3f(0.3,0.3,0.3);
-		//front_pillar bottom vertices
+		//front pillar bottom vertices
 		pillars(0,1,2,3);//bottom
 		pillars(3,2,6,7);//right
 		pillars(1,2,6,5);//back
