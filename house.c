@@ -11,14 +11,18 @@ The above copyright notice and this permission notice shall be included
 in all copies of of the code.
 */
 
+				/*Yet to be updated*/
 /*
-Things yet to be updated:
-1-The camera seems to be the light source. Make the sun the light source.
-2-Alignment of the sun.
-3-Make the sun go from east to west and move the light along with it
-  (possibly also showing the different colors of the day).
+	Try to change the color of the sun as it rises, from somewhat grey
+	to yellow at it brightest.
 */
 
+//Controls
+/*
+p - sun goes up
+o - sun goes down
+
+*/
 
 #include<GL/glut.h>
 GLfloat pillar_front[][3]={
@@ -38,6 +42,19 @@ GLfloat pillar_back_left[][3]={
 {0.15,0.00,-0.49},{0.15,0.00,-0.53},
 {0.10,0.45,-0.53},{0.10,0.45,-0.49},
 {0.15,0.45,-0.49},{0.15,0.45,-0.53}};
+
+////x,y,and z co-ordinates for glutTranslatef (positioning the sun)////
+float sunX=-10.0;
+float sunY=7.0;
+float sunZ=0.0f;
+////////////////////////////////////////////////////////////////
+
+void sun()
+{
+	glColor3f(1.0,0.6,0.0);//yellowish color
+	glTranslatef(sunX,sunY,sunZ);//positioning the sun
+   	glutSolidSphere(1.0,20,20);
+}
 
 void pillars(int a, int b, int c, int d)
 {
@@ -400,37 +417,97 @@ void vertices()
 }
 static GLfloat theta[]={0.0,0.0,0.0};
 static GLint axis=2;
-static GLdouble viewer[]={0.0,3.0,8.0};
+static GLdouble viewer[]={1.0,5.0,15.0};//eye co-ordinates for the camera (gluLookAt)
 
 void init()
 {
-	float light_diffuse[] = {2.0, 2.0, 0.0, 0.0};
-	float light_ambient[] = {0.8, 0.8, 1.0, 0.0};
-	float light_position[] = {10.0, 5.0, 5.0, 0.0};
+	float light_diffuse[] = {10.0, 7.0, 0.0, 0.0};
+	float light_ambient[] = {1.0, 1.0, 1.0, 0.0};
+	float light_position[] = {-10.0, 7.0, 0.0, 0.0};
 	//The next two line enable some of the the characteristics needed for lighing
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 }
+
+////////////BACKGROUND COLOR (ClearColor)/////////
+//These values are changed in the update function to change the backround 
+//color suiting different times of the day
+GLfloat clearRed=0.0;
+GLfloat clearGreen=0.3;
+GLfloat clearBlue=0.3;
+//////////////////////////////////////
+
 void display()
 {
+	glClearColor(clearRed,clearGreen,clearBlue,1.0);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();	
-	gluLookAt(viewer[0],viewer[1],viewer[2],0,0,0,0,1,0);
+	gluLookAt(viewer[0],viewer[1],viewer[2],0,0,0,0,9,0);
 	glRotatef(theta[0],1.0,0.0,0.0);
 	glRotatef(theta[1],0.0,1.0,0.0);
 	glRotatef(theta[2],0.0,0.0,1.0);
 
+
  //////////////////////SUN///////////////////////////////
-			glColor3f(1.0,0.6,0.0);
-    		glutSolidSphere(1.0,20,20);
+			glPushMatrix();
+				sun(); //calling the sun function which will draw the sun
+    		glPopMatrix();
  ////////////////////////////////////////////////////////
 
-	glScalef(5.0,5.0,5.0);//
+	glScalef(4.0,4.0,4.0);
 	vertices();//calling the vertices function mentioned above
 	glFlush();
 	glutSwapBuffers();
 }
+
+void update_morning()//updates the position of the sun
+{
+	if(sunX<=0.7)	
+	{
+		sunX+=0.1;//the sun will move in the x direction
+		sunY+=0.01;//the sun will move upwards
+		clearGreen+=0.007;
+		clearBlue+=0.007;
+		glutPostRedisplay();
+		glutTimerFunc(25,update_morning,0);//calls the update function every 25 milliseconds
+	}
+}
+
+void update_evening()
+{
+	if (sunX>0.7&&sunX<=15.0)
+	{
+		sunX+=0.15;//the sun moves in the x direction
+		sunY-=0.01;//the sun moves downwards
+		clearGreen-=0.007;
+		clearBlue-=0.007;
+		glutPostRedisplay();
+		glutTimerFunc(25,update_evening,0);//calls the update function every 25 milliseconds
+	}
+}
+
+void keys(unsigned char key, int x, int y)
+{
+	if(key=='x') viewer[0]-=1;
+	if(key=='X') viewer[0]+=1;
+	if(key=='s') viewer[1]-=1;
+	if(key=='S') viewer[1]+=1;
+	if(key=='z') viewer[2]-=1;
+	if(key=='Z') viewer[2]+=1;
+
+	if(key=='p')
+	{
+		update_morning();
+	}
+
+	if(key=='o')
+	{
+		update_evening();
+	}
+	display();
+}
+
 
 void mouse(int bt, int st, int x, int y)
 {
@@ -446,17 +523,6 @@ void mouse(int bt, int st, int x, int y)
 	theta[axis]+=1;
 	if(theta[axis]>360)
 		theta[axis]-=360;
-	display();
-}
-
-void keys(unsigned char key, int x, int y)
-{
-	if(key=='x') viewer[0]-=1;
-	if(key=='X') viewer[0]+=1;
-	if(key=='s') viewer[1]-=1;
-	if(key=='S') viewer[1]+=1;
-	if(key=='z') viewer[2]-=1;
-	if(key=='Z') viewer[2]+=1;
 	display();
 }
 
@@ -480,7 +546,6 @@ void main(int argc, char** argv)
 	glutInitWindowSize(500,500);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("My house");
-	glClearColor(0.0,0.0,0.0,0.0);
 	init();
 	glutDisplayFunc(display);
 	glEnable(GL_DEPTH_TEST);
