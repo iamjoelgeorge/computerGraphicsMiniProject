@@ -11,17 +11,20 @@ The above copyright notice and this permission notice shall be included
 in all copies of of the code.
 */
 
-				/*Yet to be updated*/
-/*
-	Try to change the color of the sun as it rises, from somewhat grey
-	to yellow at it brightest.
-*/
+/*		
+   C-O-N-T-R-O-L-S
 
-//Controls
-/*
+		SUN
 p - sun goes up
 o - sun goes down
+k - full movement of the sun
 
+		KEYBOARD CONTROLS	
+x - left        s - down 		z - near
+X - right 		S - up 			Z - far
+
+				MOUSE
+	I'll let you figure that out by yourself ;)
 */
 
 #include<GL/glut.h>
@@ -46,7 +49,7 @@ GLfloat pillar_back_left[][3]={
 ////x,y,and z co-ordinates for glutTranslatef (positioning the sun)////
 float sunX=-10.0;
 float sunY=7.0;
-float sunZ=0.0f;
+float sunZ=0.0;
 ////////////////////////////////////////////////////////////////
 
 void sun()
@@ -417,7 +420,7 @@ void vertices()
 }
 static GLfloat theta[]={0.0,0.0,0.0};
 static GLint axis=2;
-static GLdouble viewer[]={1.0,5.0,15.0};//eye co-ordinates for the camera (gluLookAt)
+static GLdouble viewer[]={-0.7,5.0,15.0};//eye co-ordinates for the camera (gluLookAt)
 
 void init()
 {
@@ -434,8 +437,8 @@ void init()
 //These values are changed in the update function to change the backround 
 //color suiting different times of the day
 GLfloat clearRed=0.0;
-GLfloat clearGreen=0.3;
-GLfloat clearBlue=0.3;
+GLfloat clearGreen=0.0;
+GLfloat clearBlue=0.0;
 //////////////////////////////////////
 
 void display()
@@ -476,14 +479,48 @@ void update_morning()//updates the position of the sun
 
 void update_evening()
 {
-	if (sunX>0.7&&sunX<=15.0)
+	if (sunX>0.7&&sunX<=16.0)
 	{
-		sunX+=0.15;//the sun moves in the x direction
-		sunY-=0.01;//the sun moves downwards
+		sunX+=0.1;//the sun moves in the x direction
+		sunY-=0.007;//the sun moves downwards
 		clearGreen-=0.007;
 		clearBlue-=0.007;
 		glutPostRedisplay();
 		glutTimerFunc(25,update_evening,0);//calls the update function every 25 milliseconds
+	}
+}
+
+void reset()
+{
+	sunX=-10.0;
+	sunY=7.0;
+	sunZ=0.0;
+
+	clearRed=0.0;
+	clearGreen=0.0;
+	clearBlue=0.0;
+}
+
+void fullmove()
+{
+	if(sunX<=0.7)	
+	{
+		sunX+=0.1;//the sun will move in the x direction
+		sunY+=0.01;//the sun will move upwards
+		clearGreen+=0.00855;
+		clearBlue+=0.00855;//green + blue = cyan
+		glutPostRedisplay();
+		glutTimerFunc(25,fullmove,0);//calls
+	}
+
+	else if (sunX>0.7&&sunX<=16.0)
+	{
+		sunX+=0.1;//the sun moves in the x direction
+		sunY-=0.007;//the sun moves downwards
+		clearGreen-=0.007;
+		clearBlue-=0.007;
+		glutPostRedisplay();
+		glutTimerFunc(25,fullmove,0);//calls the update function every 25 milliseconds
 	}
 }
 
@@ -496,18 +533,12 @@ void keys(unsigned char key, int x, int y)
 	if(key=='z') viewer[2]-=1;
 	if(key=='Z') viewer[2]+=1;
 
-	if(key=='p')
-	{
-		update_morning();
-	}
-
-	if(key=='o')
-	{
-		update_evening();
-	}
+	if(key=='p') update_morning();
+	if(key=='o') update_evening();
+	if(key=='r') reset();
+	if(key=='k') fullmove();
 	display();
 }
-
 
 void mouse(int bt, int st, int x, int y)
 {
