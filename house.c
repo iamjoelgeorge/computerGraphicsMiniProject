@@ -18,6 +18,7 @@ in all copies of of the code.
   p - sun goes up
   o - sun goes down
   k - full movement of the sun
+  r - reset
 
 	 KEYBOARD CONTROLS	
   x - left	s - down	z - near
