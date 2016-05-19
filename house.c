@@ -12,16 +12,16 @@ in all copies of of the code.
 */
 
 /*		
-   C-O-N-T-R-O-L-S
+  	   C-O-N-T-R-O-L-S
 
 		SUN
-p - sun goes up
-o - sun goes down
-k - full movement of the sun
+  p - sun goes up
+  o - sun goes down
+  k - full movement of the sun
 
-		KEYBOARD CONTROLS	
-x - left        s - down 		z - near
-X - right 		S - up 			Z - far
+	 KEYBOARD CONTROLS	
+  x - left	s - down	z - near
+  X - right	S - up		Z - far
 
 				MOUSE
 	I'll let you figure that out by yourself ;)
