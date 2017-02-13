@@ -1,7 +1,7 @@
-# My house on a sunny day
+# My House On A Sunny Day
 
 ## About
-VTU BE CSE 6th sem OpenGL mini project
+VTU BE CSE 6th sem OpenGL Mini Project
 
 ### Authors
 - Joel George
